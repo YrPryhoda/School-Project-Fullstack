@@ -1,5 +1,5 @@
-import { Teacher } from './../entity/Teacher';
-import { EntityRepository, Repository, getCustomRepository } from 'typeorm';
+import { EntityRepository, Repository } from 'typeorm';
+import { Teacher } from '../entity/Teacher';
 
 
 @EntityRepository(Teacher)

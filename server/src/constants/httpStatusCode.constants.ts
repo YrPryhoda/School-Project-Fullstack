@@ -1,4 +1,3 @@
-
 enum HttpStatusCode {
   CONTINUE = 100,
 

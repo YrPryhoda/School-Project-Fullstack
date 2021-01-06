@@ -1,8 +1,7 @@
-import { TeacherRepository } from './../repositories/teacher.repository';
 import { Request, Response, NextFunction } from 'express';
 import { getCustomRepository } from 'typeorm';
 import { getWebError } from '../helpers/error.handler';
-
+import { TeacherRepository } from '../repositories/teacher.repository';
 
 class TeacherController {
   createTeacher = async (req: Request, res: Response, next: NextFunction) => {
@@ -27,6 +26,7 @@ class TeacherController {
 
   findTeacher = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const teacherRepository = getCustomRepository(TeacherRepository);
 
     } catch (error) {
       res.status(400).send(getWebError(error, 400));
@@ -35,6 +35,7 @@ class TeacherController {
 
   updateTeacher = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const teacherRepository = getCustomRepository(TeacherRepository);
 
     } catch (error) {
       res.status(400).send(getWebError(error, 400));
@@ -43,6 +44,7 @@ class TeacherController {
 
   deleteTeacher = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const teacherRepository = getCustomRepository(TeacherRepository);
 
     } catch (error) {
       res.status(400).send(getWebError(error, 400));

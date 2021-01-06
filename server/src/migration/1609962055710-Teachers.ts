@@ -1,6 +1,6 @@
-import { Subjects } from './../models/TeacherModel';
-import { Teacher } from './../entity/Teacher';
-import { MigrationInterface, QueryRunner, getRepository, getCustomRepository } from 'typeorm';
+import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
+import { Subjects } from '../models/TeacherModel';
+import { Teacher } from '../entity/Teacher';
 
 export class Teachers1609962055710 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -8,7 +8,7 @@ export class Teachers1609962055710 implements MigrationInterface {
     const teacher1 = new Teacher();
     teacher1.firstName = 'Anna';
     teacher1.lastName = 'Fedorenko';
-    teacher1.canLearn = `Subjects['Math']`;
+    teacher1.canLearn = JSON.stringify([Subjects['Math'], Subjects['History']]);
 
     await getRepository('Teacher').save(teacher1)
   }

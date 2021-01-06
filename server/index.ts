@@ -8,7 +8,6 @@ import HttpStatusCode from './src/constants/httpStatusCode.constants';
 
 createConnection()
   .then(async (connection) => {
-    console.log(connection);
 
     await connection.runMigrations();
     const app = express();
