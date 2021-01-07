@@ -11,7 +11,10 @@ export class TeacherRepository extends Repository<Teacher>{
   };
 
   findById(id: string): Promise<TeacherModel | undefined> {
-    return this.findOne(id)
+    return this.createQueryBuilder('Teacher')
+      .leftJoinAndSelect('Teacher.canLearn', 'lesson')
+      .where('Teacher.id = :id', { id })
+      .getOne();
   };
 
   createOne(teacher: Teacher) {

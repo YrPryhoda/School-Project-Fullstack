@@ -1,6 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-import { TeacherModel, Subjects } from '../models/TeacherModel';
-
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { TeacherModel } from '../models/TeacherModel';
+import { Lesson } from './Lesson';
 @Entity()
 export class Teacher implements TeacherModel {
   @PrimaryGeneratedColumn('uuid')
@@ -15,6 +15,12 @@ export class Teacher implements TeacherModel {
   @Column({ nullable: true })
   age?: number;
 
-  @Column()
-  canLearn!: string;
+  @Column({ nullable: true })
+  email?: string;
+
+  @Column({ nullable: true })
+  tel?: string;
+
+  @OneToMany(() => Lesson, (lesson) => lesson.teacher)
+  canLearn!: Lesson[];
 }

@@ -27,8 +27,8 @@ class TeacherController {
       res.send(teachers)
     } catch (error) {
       res
-        .status(HttpStatusCode.BAD_REQUEST)
-        .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
+        .status(HttpStatusCode.NOT_FOUND)
+        .send(getWebError(error, HttpStatusCode.NOT_FOUND));
     }
   }
 
@@ -41,8 +41,8 @@ class TeacherController {
 
     } catch (error) {
       res
-        .status(HttpStatusCode.BAD_REQUEST)
-        .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
+        .status(HttpStatusCode.NOT_FOUND)
+        .send(getWebError(error, HttpStatusCode.NOT_FOUND));
     }
   }
 
@@ -55,8 +55,8 @@ class TeacherController {
       res.send(updatedTeacher);
     } catch (error) {
       res
-        .status(HttpStatusCode.BAD_REQUEST)
-        .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
+        .status(HttpStatusCode.NOT_ACCEPTABLE)
+        .send(getWebError(error, HttpStatusCode.NOT_ACCEPTABLE));
     }
   }
 
