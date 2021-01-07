@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import * as bodyParser from 'body-parser'
 import { createConnection } from 'typeorm';
 import routes from './src/routes';
 import { appPort } from './config/app.config';
@@ -11,9 +12,9 @@ createConnection()
 
     await connection.runMigrations();
     const app = express();
+    app.use(bodyParser.json())
 
     app.use('/api', routes);
-
     app.use('/', (req, res) => res.sendStatus(HttpStatusCode.OK)); // health check
 
     app.listen(appPort, (): void => {
