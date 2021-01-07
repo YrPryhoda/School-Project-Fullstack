@@ -1,10 +1,22 @@
 import { Request, Response, NextFunction } from 'express';
-import { getCustomRepository } from 'typeorm';
+import { getCustomRepository, Repository } from 'typeorm';
 import HttpStatusCode from '../constants/httpStatusCode.constants';
 import { getWebError } from '../helpers/error.handler';
 import { LessonRepository } from '../repositories/lesson.repository';
 
 class LessonController {
+  createLesson = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const lessonRepository = getCustomRepository(LessonRepository);
+      const lesson = await lessonRepository.createOne(req.body);
+
+      res.send(lesson)
+    } catch (error) {
+      res
+        .status(HttpStatusCode.BAD_REQUEST)
+        .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
+    }
+  }
 
   findAllLessons = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
@@ -32,36 +44,36 @@ class LessonController {
         .send(getWebError(error, HttpStatusCode.NOT_FOUND));
     }
   }
-  /* 
-    updateTeacher = async (req: Request, res: Response, next: NextFunction) => {
-      try {
-        const teacherRepository = getCustomRepository(TeacherRepository);
-        const { params: { id }, body } = req;
-        const updatedTeacher = await teacherRepository.updateOne(id, body);
-  
-        res.send(updatedTeacher);
-      } catch (error) {
-        res
-          .status(HttpStatusCode.NOT_ACCEPTABLE)
-          .send(getWebError(error, HttpStatusCode.NOT_ACCEPTABLE));
-      }
+
+  updateLesson = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const lessonRepository = getCustomRepository(LessonRepository);
+      const { params: { id }, body } = req;
+      const updatedTeacher = await lessonRepository.updateOne(id, body);
+
+      res.send(updatedTeacher);
+    } catch (error) {
+      res
+        .status(HttpStatusCode.NOT_ACCEPTABLE)
+        .send(getWebError(error, HttpStatusCode.NOT_ACCEPTABLE));
     }
-  
-    deleteTeacher = async (req: Request, res: Response, next: NextFunction) => {
-      try {
-        const teacherRepository = getCustomRepository(TeacherRepository);
-        const { id } = req.params;
-  
-        const result = await teacherRepository.deleteOne(id);
-  
-        res.send(result)
-      } catch (error) {
-        res
-          .status(HttpStatusCode.BAD_REQUEST)
-          .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
-      }
+  }
+
+  deleteLesson = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const lessonRepository = getCustomRepository(LessonRepository);
+      const { id } = req.params;
+
+      const result = await lessonRepository.deleteOne(id);
+
+      res.send(result)
+    } catch (error) {
+      res
+        .status(HttpStatusCode.BAD_REQUEST)
+        .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
     }
-   */
+  }
+
 }
 
 export default LessonController;

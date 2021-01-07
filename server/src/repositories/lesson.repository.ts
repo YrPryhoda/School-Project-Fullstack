@@ -1,29 +1,20 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Lesson } from '../entity/Lesson';
 import { LessonModel } from '../models/LessonModel';
-
+import { BaseRepository } from './base.repository';
 
 @EntityRepository(Lesson)
-export class LessonRepository extends Repository<Lesson>{
-
-  selectAll(): Promise<LessonModel[] | []> {
-    return this.find()
-  };
+export class LessonRepository extends BaseRepository<Lesson>{
 
   findById(id: string): Promise<LessonModel | undefined> {
-    return this.findOne(id)
+    return this.createQueryBuilder('Lesson')
+      .leftJoinAndSelect('Lesson.teacher', 'teacher')
+      .where('Lesson.id = :id', { id })
+      .getOne();
   };
 
-  createOne(teacher: Lesson) {
-    return this.save(teacher);
-  }
-
   async updateOne(id: string, newTeacher: Lesson): Promise<LessonModel | undefined> {
-    await this.update(id, newTeacher);
+    await this.updateById(id, newTeacher);
     return this.findById(id)
-  }
-
-  deleteOne(id: string) {
-    return this.delete(id)
   }
 }

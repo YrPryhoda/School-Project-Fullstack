@@ -2,11 +2,11 @@ import { Router } from 'express';
 import LessonController from '../controllers/lesson.controller';
 
 const {
-  /*   createTeacher, */
+  createLesson,
   findAllLessons,
   findLesson,
-  /*   updateTeacher,
-    deleteTeacher */
+  updateLesson,
+  deleteLesson
 } = new LessonController();
 
 const routes = Router();
@@ -14,8 +14,8 @@ const routes = Router();
 routes
   .get('/', findAllLessons)
   .get('/:id', findLesson)
-/*   .post('/', createTeacher)
-  .put('/:id', updateTeacher)
-  .delete('/:id', deleteTeacher) */
+  .post('/', createLesson)
+  .put('/:id', updateLesson)
+  .delete('/:id', deleteLesson)
 
 export default routes;

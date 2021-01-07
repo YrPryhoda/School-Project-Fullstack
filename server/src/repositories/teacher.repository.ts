@@ -1,14 +1,11 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Teacher } from '../entity/Teacher';
 import { TeacherModel } from '../models/TeacherModel';
+import { BaseRepository } from './base.repository';
 
 
 @EntityRepository(Teacher)
-export class TeacherRepository extends Repository<Teacher>{
-
-  selectAll(): Promise<TeacherModel[] | []> {
-    return this.find()
-  };
+export class TeacherRepository extends BaseRepository<Teacher>{
 
   findById(id: string): Promise<TeacherModel | undefined> {
     return this.createQueryBuilder('Teacher')
@@ -17,16 +14,8 @@ export class TeacherRepository extends Repository<Teacher>{
       .getOne();
   };
 
-  createOne(teacher: Teacher) {
-    return this.save(teacher);
-  }
-
   async updateOne(id: string, newTeacher: Teacher): Promise<TeacherModel | undefined> {
-    await this.update(id, newTeacher);
+    await this.updateById(id, newTeacher);
     return this.findById(id)
-  }
-
-  deleteOne(id: string) {
-    return this.delete(id)
   }
 }

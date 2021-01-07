@@ -1,24 +1,24 @@
 import { MigrationInterface, QueryRunner, getRepository } from 'typeorm';
 import { Lesson } from '../entity/Lesson';
-import { LessonType, LessonDuration } from '../models/LessonModel';
+import { LessonType, LessonDuration, Subjects } from '../models/LessonModel';
 
 export class Lesson1609824549272 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     const lessons = [
       {
-        title: 'Maths',
+        title: Subjects.Maths,
         room: 102,
         duration: LessonDuration.short,
         type: LessonType.group,
       },
       {
-        title: 'Biology',
+        title: Subjects.Biology,
         room: 210,
         duration: LessonDuration.standart,
         type: LessonType.practical,
       },
       {
-        title: 'History',
+        title: Subjects.History,
         room: 301,
         duration: LessonDuration.double,
         type: LessonType.lecture,

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { TeacherModel } from '../models/TeacherModel';
 import { Lesson } from './Lesson';
 @Entity()
@@ -21,6 +21,6 @@ export class Teacher implements TeacherModel {
   @Column({ nullable: true })
   tel?: string;
 
-  @OneToMany(() => Lesson, (lesson) => lesson.teacher)
+  @ManyToMany(() => Lesson, (lesson) => lesson.teacher)
   canLearn!: Lesson[];
 }

@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { LessonModel, LessonDuration, LessonType, Subjects } from '../models/LessonModel';
 import { TeacherModel } from '../models/TeacherModel';
 import { Teacher } from './Teacher';
@@ -8,11 +8,12 @@ export class Lesson implements LessonModel {
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
-  @Column()
+  @Column('text')
   title!: Subjects;
 
-  @ManyToOne(() => Teacher, (teacher: Teacher) => teacher.canLearn, { cascade: true, onDelete: 'CASCADE' })
-  teacher!: TeacherModel;
+  @ManyToMany(() => Teacher, (teacher: Teacher) => teacher.canLearn, { cascade: true, onDelete: 'CASCADE' })
+  @JoinTable({ name: 'teachers_lessons' })
+  teacher!: TeacherModel[];
 
   @Column()
   room!: number;

@@ -31,7 +31,7 @@ export interface LessonModel {
   id: string,
   title: Subjects,
   room: number,
-  teacher: TeacherModel,
+  teacher: TeacherModel[],
   duration?: LessonDuration,
   type?: LessonType
 }
