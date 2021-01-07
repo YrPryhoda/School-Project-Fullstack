@@ -1,5 +1,9 @@
 import { LessonModel } from './LessonModel';
 
+export enum Sex{
+  male = 'male',
+  female = 'female'
+}
 export interface TeacherModel {
   id: string,
   firstName: string,
@@ -7,5 +11,7 @@ export interface TeacherModel {
   email?: string,
   tel?: string,
   age?: number,
+  sex: Sex,
+  yearsofExperience?: number,
   canLearn: LessonModel[]
 }

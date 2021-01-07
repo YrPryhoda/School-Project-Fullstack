@@ -1,4 +1,5 @@
 import { TeacherModel } from './TeacherModel';
+import { ClassroomModel } from './ClassroomModel';
 
 export enum Subjects {
   Maths = 'Maths',
@@ -30,7 +31,7 @@ export enum LessonType {
 export interface LessonModel {
   id: string,
   title: Subjects,
-  room: number,
+  room: ClassroomModel[],
   teacher: TeacherModel[],
   duration?: LessonDuration,
   type?: LessonType

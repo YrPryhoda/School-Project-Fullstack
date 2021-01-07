@@ -41,7 +41,6 @@
     "no-redeclare": "error",
     "no-var": "error",
     "radix": "error",
-    // warnings
     "prefer-const": "error",
     "@typescript-eslint/ban-types": "error",
     "@typescript-eslint/no-this-alias": "error",
@@ -51,7 +50,6 @@
     "@typescript-eslint/prefer-namespace-keyword": "error",
     "prefer-spread": "error",
     "prefer-rest-params": "error",
-    // disabled and verified
     "dot-notation": "off",
     "no-console": "off",
     "@typescript-eslint/interface-name-prefix": "off",
@@ -78,6 +76,8 @@
     "comma-dangle": "off",
     "no-restricted-modules": "off",
     "no-shadow": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
     "quotes": [
       2,
       "single"

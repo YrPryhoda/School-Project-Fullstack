@@ -1,7 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { LessonModel, LessonDuration, LessonType, Subjects } from '../models/LessonModel';
 import { TeacherModel } from '../models/TeacherModel';
+import { ClassroomModel } from '../models/ClassroomModel';
 import { Teacher } from './Teacher';
+import { Classroom } from './Classroom';
 
 @Entity()
 export class Lesson implements LessonModel {
@@ -15,8 +17,9 @@ export class Lesson implements LessonModel {
   @JoinTable({ name: 'teachers_lessons' })
   teacher!: TeacherModel[];
 
-  @Column()
-  room!: number;
+  @ManyToMany(() => Classroom, (room: Classroom) => room.allowLessons, { cascade: true, onDelete: 'CASCADE' })
+  @JoinTable({ name: 'lessons_rooms' })
+  room!: ClassroomModel[];
 
   @Column('text')
   duration?: LessonDuration
