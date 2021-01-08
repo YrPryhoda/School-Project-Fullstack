@@ -1,0 +1,10 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  color: rgb(8, 8, 97);
+  font-size: 1.4rem;
+}

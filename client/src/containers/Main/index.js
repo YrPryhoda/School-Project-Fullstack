@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import TeacherTable from '../../components/TeacherTable';
 import LessonTable from '../../components/LessonTable';
+import Landing from '../../components/Landing';
 import { loadAllWatcher } from '../../ducks/main';
 import { Route, Switch } from 'react-router-dom'
 
@@ -15,6 +16,7 @@ const App = () => {
 
   return (
     <Switch>
+      <Route path='/' exact render={() => <Landing />} />
       <Route path='/teachers' render={() => <TeacherTable teachers={teachers} />} />
       <Route path='/lessons' render={() => <LessonTable lessons={lessons} />} />
     </Switch>

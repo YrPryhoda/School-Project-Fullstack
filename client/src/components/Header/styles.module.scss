@@ -1,14 +1,21 @@
 .wrapper {
   display: flex;
+  height: 70px;
   justify-content: space-around;
+  align-items: stretch;
   font-size: 26px;
   margin-bottom: 30px;
 
   a {
+    align-self: center;
     text-decoration: none;
     color: #101010;
     &:hover {
       color: #757373;
     }
+  }
+
+  .activeLink {
+    border-bottom: 1px solid blue;
   }
 }

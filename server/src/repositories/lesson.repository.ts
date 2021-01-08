@@ -6,6 +6,20 @@ import { BaseRepository } from './base.repository';
 @EntityRepository(Lesson)
 export class LessonRepository extends BaseRepository<Lesson>{
 
+  selectAll(): Promise<LessonModel[] | []> {
+    return this.createQueryBuilder('Lesson')
+      .innerJoin('Lesson.teacher', 'teacher')
+      .innerJoin('Lesson.room', 'room')
+      .select([
+        'Lesson',
+        'teacher.id',
+        'teacher.firstName',
+        'teacher.lastName',
+        'room.roomNumber',
+      ])
+      .getMany();
+  };
+
   findById(id: string): Promise<LessonModel | undefined> {
     return this.createQueryBuilder('Lesson')
       .leftJoinAndSelect('Lesson.teacher', 'teacher')

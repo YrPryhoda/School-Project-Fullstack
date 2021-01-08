@@ -1,19 +1,8 @@
 import React from 'react'
+import { getSimpleList } from '../../helpers';
 import styles from './styles.module.scss';
 
 const TeacherTable = ({ teachers }) => {
-
-  const getSubjects = teacherSubjects => {
-
-    if (!teacherSubjects || !teacherSubjects.length) {
-      return '-'
-    }
-
-    return teacherSubjects
-      .map(subject => Object.values(subject))
-      .flat()
-      .join(', ')
-  }
 
   return (
     <table className={styles.table}>
@@ -45,16 +34,16 @@ const TeacherTable = ({ teachers }) => {
                 <td>{lastName}</td>
                 <td>{sex}</td>
                 <td>{age || '-'}</td>
-                <td>{yearsofExperience || '-'}</td>
+                <td>{yearsofExperience ? `${yearsofExperience} years` : '-'}</td>
                 <td>{email || '-'}</td>
                 <td>{phone || '-'}</td>
-                <td>{getSubjects(canLearn)}</td>
+                <td>{getSimpleList(canLearn)}</td>
               </tr>
             )
           })
         }
       </tbody>
-    </table> 
+    </table>
   )
 }
 

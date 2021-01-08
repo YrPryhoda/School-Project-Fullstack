@@ -1,14 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styles from './styles.module.scss';
 
 const Header = ({ children }) => {
   return (
     <>
       <div className={styles.wrapper}>
-        <Link to='/'>Main page</Link>
-        <Link to='/teachers'>Teachers page</Link>
-        <Link to='/lessons'>Lessons page</Link>
+        <NavLink
+          exact={true}
+          activeClassName={styles.activeLink}
+          to='/'
+        >
+          Main page
+          </NavLink>
+        <NavLink
+          activeClassName={styles.activeLink}
+          to='/teachers'
+        >
+          Teachers page
+          </NavLink>
+        <NavLink
+          activeClassName={styles.activeLink}
+          to='/lessons'
+        >
+          Lessons page
+          </NavLink>
       </div>
       {children}
     </>

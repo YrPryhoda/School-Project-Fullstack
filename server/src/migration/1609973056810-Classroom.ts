@@ -25,7 +25,7 @@ export class Classroom1609973056810 implements MigrationInterface {
         description: 'Classroom for seminars',
       },
       {
-        roomNumber: 120,
+        roomNumber: 199,
         floor: 3,
         build: BuildType.A,
         description: 'For first year students',

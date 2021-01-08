@@ -1,16 +1,22 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  font-size: 1.2rem;
+
   .tableHeader {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     th {
       border-bottom: 2px solid #ccc;
     }
   }
 
+  td {
+    text-align: center;
+  }
+
   tbody:before {
     content: "@";
-    display: block; 
+    display: block;
     line-height: 15px;
     text-indent: -99999px;
   }
