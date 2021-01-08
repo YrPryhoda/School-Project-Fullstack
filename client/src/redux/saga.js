@@ -1,7 +1,8 @@
-import { all, takeEvery } from 'redux-saga/effects'
+import { all } from 'redux-saga/effects'
+import mainSaga from '../ducks/main';
 
 export default function* rootSaga() {
   yield all([
-    takeEvery('LOG', () => { })
+    mainSaga()
   ])
 }

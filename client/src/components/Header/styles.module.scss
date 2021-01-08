@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  justify-content: space-around;
+  font-size: 26px;
+  margin-bottom: 30px;
+
+  a {
+    text-decoration: none;
+    color: #101010;
+    &:hover {
+      color: #757373;
+    }
+  }
+}

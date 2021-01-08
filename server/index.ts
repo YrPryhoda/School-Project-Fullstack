@@ -12,7 +12,9 @@ createConnection()
 
     await connection.runMigrations();
     const app = express();
+
     app.use(bodyParser.json())
+    app.use(cors({ origin: true }));
 
     app.use('/api', routes);
     app.use('/', (req, res) => res.sendStatus(HttpStatusCode.OK)); // health check
