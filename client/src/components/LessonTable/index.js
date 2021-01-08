@@ -1,9 +1,26 @@
 import React from 'react'
-import {getSimpleList} from '../../helpers';
-
+import { getSimpleList } from '../../helpers';
+import { NavLink } from 'react-router-dom'
 import styles from './styles.module.scss'
 
 const LessonTable = ({ lessons }) => {
+
+  const getTeachers = (teachers) => {
+    if (!teachers || !teachers.length) {
+      return '-'
+    }
+
+    return teachers.map(person => (
+      <NavLink
+        to={`/teacher/${person.id}`}
+        className={styles.link}
+      >
+        <div>
+          {`${person.firstName} ${person.lastName}`}
+        </div>
+      </NavLink>
+    ))
+  }
 
   return (
     <table className={styles.table}>
@@ -32,7 +49,8 @@ const LessonTable = ({ lessons }) => {
                 <td>{type || '-'}</td>
                 <td>{duration ? `${duration} min` : '-'}</td>
                 <td>{getSimpleList(room)}</td>
-            
+                <td>{getTeachers(teacher)}</td>
+
 
               </tr>
             )
