@@ -30,6 +30,8 @@ export const reducer = (state = initialState, { type, payload, error }) => {
 
     case FETCH_ALL_REQUEST:
     case ADD_TEACHER_REQUEST:
+    case DELETE_TEACHER_REQUEST:
+    case FETCH_TEACHER_REQUEST:
       return {
         ...state,
         loading: true

@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Length, IsEmail, Min, Max } from 'class-validator';
 import { LessonModel, LessonDuration, LessonType, Subjects } from '../models/LessonModel';
 import { TeacherModel } from '../models/TeacherModel';
 import { ClassroomModel } from '../models/ClassroomModel';
@@ -11,6 +12,7 @@ export class Lesson implements LessonModel {
   id!: string;
 
   @Column('text')
+  @Length(1)
   title!: Subjects;
 
   @ManyToMany(() => Teacher, (teacher: Teacher) => teacher.canLearn, { cascade: true, onDelete: 'CASCADE' })

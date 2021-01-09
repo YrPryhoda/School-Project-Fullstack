@@ -7,6 +7,7 @@ import { TeacherRepository } from '../repositories/teacher.repository';
 class TeacherController {
 
   createTeacher = async (req: Request, res: Response, next: NextFunction) => {
+
     try {
       const teacherRepository = getCustomRepository(TeacherRepository);
       const teacher = await teacherRepository.createOne(req.body);
@@ -65,7 +66,7 @@ class TeacherController {
       const teacherRepository = getCustomRepository(TeacherRepository);
       const { id } = req.params;
 
-      const result = await teacherRepository.deleteOne(id);
+      const result = await teacherRepository.deleteOne(id as string);
 
       res.send(result)
     } catch (error) {

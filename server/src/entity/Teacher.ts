@@ -1,8 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToMany } from 'typeorm';
 import { TeacherModel, Sex } from '../models/TeacherModel';
 import { Lesson } from './Lesson';
+
 @Entity()
 export class Teacher implements TeacherModel {
+
   @PrimaryGeneratedColumn('uuid')
   id!: string;
 
