@@ -6,13 +6,15 @@ const {
   findAllTeachers,
   findTeacher,
   updateTeacher,
-  deleteTeacher
+  deleteTeacher,
+  findTeachersByFilters
 } = new TeacherController();
 
 const routes = Router();
 
 routes
   .get('/', findAllTeachers)
+  .patch('/filters', findTeachersByFilters)
   .get('/:id', findTeacher)
   .post('/', createTeacher)
   .put('/:id', updateTeacher)

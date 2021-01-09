@@ -20,6 +20,7 @@ export class Teachers1609962055710 implements MigrationInterface {
     teacher2.email = 'email@ukr.ua';
     teacher2.tel = '+380636995492';
     teacher2.age = 24;
+    teacher2.yearsofExperience = 1;
     teacher2.sex = Sex.male;
     teacher2.avatar = 'https://imgur.com/I80W1Q0.png';
 

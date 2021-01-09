@@ -5,6 +5,7 @@ import TeacherForm from '../TeacherForm';
 import { useDispatch } from 'react-redux';
 import { deleteTeacherWatcher } from '../../ducks/main';
 import { NavLink } from 'react-router-dom';
+import FilterBar from '../FilterBar';
 
 const TeacherTable = ({
   teachers,
@@ -31,6 +32,7 @@ const TeacherTable = ({
 
   return (
     <>
+      <FilterBar />
       <table className={styles.table}>
         <thead className={styles.tableHeader}>
           <tr>
@@ -66,7 +68,7 @@ const TeacherTable = ({
                   <td>
                     {
                       yearsofExperience ?
-                        `${yearsofExperience} years` :
+                        `${yearsofExperience} year(s)` :
                         '-'
                     }
                   </td>

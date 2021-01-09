@@ -33,6 +33,21 @@ class TeacherController {
     }
   }
 
+  findTeachersByFilters = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const teacherRepository = getCustomRepository(TeacherRepository);
+      const {sex, age, yearsofExperience} = req.body
+
+      const teacher = await teacherRepository.findByFilters(sex, age, yearsofExperience);
+
+      res.send(teacher);
+    } catch (error) {
+      res
+        .status(HttpStatusCode.NOT_FOUND)
+        .send(validationError(error, res));
+    }
+  }
+
   findTeacher = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const teacherRepository = getCustomRepository(TeacherRepository);

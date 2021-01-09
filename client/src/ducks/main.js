@@ -15,6 +15,9 @@ export const DELETE_TEACHER_SUCCESS = 'DELETE_TEACHER_SUCCESS';
 export const FETCH_TEACHER_REQUEST = 'FETCH_TEACHER_REQUEST';
 export const FETCH_TEACHER_SUCCESS = 'FETCH_TEACHER_SUCCESS';
 
+export const FETCH_WITH_FILTERS_REQUEST = 'FETCH_WITH_FILTERS_REQUEST';
+export const FETCH_WITH_FILTERS_SUCCESS = 'FETCH_WITH_FILTERS_SUCCESS';
+
 
 const initialState = {
   loading: false,
@@ -37,6 +40,7 @@ export const reducer = (state = initialState, { type, payload, error }) => {
         loading: true
       };
 
+    case FETCH_WITH_FILTERS_SUCCESS:
     case FETCH_TEACHERS_SUCCESS:
       return {
         ...state,
@@ -136,7 +140,7 @@ const editTeacherWorker = function* (action) {
 
   try {
     const newTeacher = yield call(callApi, endpoint, props)
-    
+
     if (newTeacher.statusCode) {
       return;
     } else {
@@ -197,11 +201,36 @@ const loadTeacherByIdWorker = function* (action) {
   }
 }
 
+export const fetchWithFiltersdWatcher = (filters) => ({
+  type: FETCH_WITH_FILTERS_REQUEST,
+  filters
+})
+
+const fetchWithFiltersdWorker = function* (action) {
+  const { filters } = action;
+  const props = {
+    method: 'PATCH',
+    body: filters
+  }
+  const endpoint = '/api/teacher/filters';
+  try {
+    const result = yield call(callApi, endpoint, props)
+    yield put({
+      type: FETCH_WITH_FILTERS_SUCCESS,
+      payload: result
+    })
+    console.log(result);
+  } catch (error) {
+    yield put(actionRequestFail(error))
+  }
+}
+
 export default function* saga() {
   yield all([
     takeEvery(FETCH_ALL_REQUEST, loadAllWorker),
     takeEvery(ADD_TEACHER_REQUEST, editTeacherWorker),
     takeEvery(DELETE_TEACHER_REQUEST, deleteTeacherWorker),
     takeEvery(FETCH_TEACHER_REQUEST, loadTeacherByIdWorker),
+    takeEvery(FETCH_WITH_FILTERS_REQUEST, fetchWithFiltersdWorker),
   ])
 }

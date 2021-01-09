@@ -15,6 +15,7 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
     yearsofExperience: person.yearsofExperience || 0,
     email: person.email || '',
     tel: person.tel || '',
+    avatar: person.avatar || '',
   });
 
   const onChange = event => setForm({
@@ -33,7 +34,7 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
       <div className={styles.modal}>
         <form action='' onSubmit={handleSubmitForm}>
           <fieldset>
-            <legend>First Name</legend>
+            <legend>First Name*</legend>
             <input
               className={styles.input}
               placeholder='Ivan'
@@ -45,7 +46,7 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
           </fieldset>
 
           <fieldset>
-            <legend>Last Name</legend>
+            <legend>Last Name*</legend>
             <input
               className={styles.input}
               placeholder='Ivanov'
@@ -57,7 +58,7 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
           </fieldset>
 
           <fieldset>
-            <legend>Email</legend>
+            <legend>Email*</legend>
             <input
               className={styles.input}
               placeholder='email@example.com'
@@ -81,7 +82,32 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
           </fieldset>
 
           <fieldset>
+            <legend>Avatar</legend>
+            <input
+              className={styles.input}
+              placeholder='URL address'
+              type="text"
+              name='avatar'
+              value={form.avatar}
+              onChange={onChange}
+            />
+          </fieldset>
+
+          <fieldset>
             <legend>Other information</legend>
+            <label htmlFor='age'> Age</label>
+            <input
+              id='age'
+              className={styles.smInput}
+              placeholder='0-99'
+              type="number"
+              min='0'
+              max='99'
+              name='age'
+              value={form.age}
+              onChange={onChange}
+            />
+
             <label htmlFor='experience'> Experience</label>
             <input
               id='experience'
@@ -94,6 +120,7 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
               value={form.yearsofExperience}
               onChange={onChange}
             />
+
             <label htmlFor='sex'> Sex</label>
             <select
               className={styles.smInput}

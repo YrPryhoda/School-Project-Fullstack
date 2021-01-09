@@ -1,6 +1,7 @@
 import React from 'react'
 import { getSimpleList } from '../../helpers';
 import { NavLink } from 'react-router-dom'
+
 import styles from './styles.module.scss'
 
 const LessonTable = ({ lessons }) => {

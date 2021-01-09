@@ -8,7 +8,11 @@ const TeacherProfile = ({ teacher }) => {
   return (
     <div className={styles.section}>
       <div className={styles.col}>
-        <img src={avatar} alt='avatar' className={styles.avatar} />
+        {
+          avatar ?
+            <img src={avatar} alt='avatar' className={styles.avatar} /> :
+            <div className={styles.avatarBlock}></div>
+        }
       </div>
       <div className={styles.col}>
         <h2>{`${firstName} ${lastName}`}</h2>
