@@ -1,4 +1,4 @@
-import { put, call, take, all, fork, takeEvery } from 'redux-saga/effects'
+import { put, call, all, takeEvery } from 'redux-saga/effects'
 import { callApi } from '../services/webApi';
 
 export const FETCH_ALL_REQUEST = 'FETCH_ALL_REQUEST';
@@ -11,6 +11,10 @@ export const ADD_TEACHER_SUCCESS = 'ADD_TEACHER_SUCCESS';
 
 export const DELETE_TEACHER_REQUEST = 'DELETE_TEACHER_REQUEST';
 export const DELETE_TEACHER_SUCCESS = 'DELETE_TEACHER_SUCCESS';
+
+export const FETCH_TEACHER_REQUEST = 'FETCH_TEACHER_REQUEST';
+export const FETCH_TEACHER_SUCCESS = 'FETCH_TEACHER_SUCCESS';
+
 
 const initialState = {
   loading: false,
@@ -36,6 +40,13 @@ export const reducer = (state = initialState, { type, payload, error }) => {
         ...state,
         loading: false,
         teachers: payload
+      }
+
+    case FETCH_TEACHER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        teacher: payload
       }
 
     case ADD_TEACHER_SUCCESS:
@@ -159,10 +170,33 @@ const deleteTeacherWorker = function* (action) {
   }
 }
 
+export const loadTeacherByIdWatcher = id => ({
+  type: FETCH_TEACHER_REQUEST,
+  id
+})
+
+const loadTeacherByIdWorker = function* (action) {
+  const { id } = action;
+  const endpoint = `/api/teacher/${id}`;
+
+  try {
+    const teacher = yield call(callApi, endpoint)
+
+    yield put({
+      type: FETCH_TEACHER_SUCCESS,
+      payload: teacher
+    })
+
+  } catch (error) {
+    yield put(actionRequestFail(error))
+  }
+}
+
 export default function* saga() {
   yield all([
     takeEvery(FETCH_ALL_REQUEST, loadAllWorker),
     takeEvery(ADD_TEACHER_REQUEST, editTeacherWorker),
     takeEvery(DELETE_TEACHER_REQUEST, deleteTeacherWorker),
+    takeEvery(FETCH_TEACHER_REQUEST, loadTeacherByIdWorker),
   ])
 }

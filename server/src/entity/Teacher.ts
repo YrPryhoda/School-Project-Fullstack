@@ -25,6 +25,9 @@ export class Teacher implements TeacherModel {
   tel?: string;
 
   @Column({ nullable: true })
+  avatar?: string;
+
+  @Column({ nullable: true })
   yearsofExperience?: number;
 
   @ManyToMany(() => Lesson, (lesson) => lesson.teacher)

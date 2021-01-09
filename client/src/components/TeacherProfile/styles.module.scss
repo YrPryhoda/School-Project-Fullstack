@@ -1,0 +1,24 @@
+.section {
+  display: flex;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 900px;
+  min-height: calc(100vh - 120px);
+  padding: 30px;
+  background-color: #fffed0;
+
+  .col {
+    flex-basis: 50%;
+    padding: 20px;
+    font-size: 24px;
+
+    .avatar {
+      width: 100%;
+    }
+
+    .info {
+      font-style: italic;
+      font-weight: 800;
+    }
+  }
+}

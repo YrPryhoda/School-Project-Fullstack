@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import TeacherForm from '../TeacherForm';
 import { useDispatch } from 'react-redux';
 import { deleteTeacherWatcher } from '../../ducks/main';
+import { NavLink } from 'react-router-dom';
 
 const TeacherTable = ({
   teachers,
@@ -34,8 +35,7 @@ const TeacherTable = ({
         <thead className={styles.tableHeader}>
           <tr>
             <th>№</th>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Name</th>
             <th>Sex</th>
             <th>Age</th>
             <th>Experience</th>
@@ -56,11 +56,20 @@ const TeacherTable = ({
                   className={styles.userRow}
                 >
                   <td>{index + 1}</td>
-                  <td>{firstName}</td>
-                  <td>{lastName}</td>
+                  <td>
+                    <NavLink to={`/teacher/${id}`}>
+                      {`${firstName} ${lastName}`}
+                    </NavLink>
+                  </td>
                   <td>{sex}</td>
                   <td>{age || '-'}</td>
-                  <td>{yearsofExperience ? `${yearsofExperience} years` : '-'}</td>
+                  <td>
+                    {
+                      yearsofExperience ?
+                        `${yearsofExperience} years` :
+                        '-'
+                    }
+                  </td>
                   <td>{email || '-'}</td>
                   <td>{tel || '-'}</td>
                   <td>{getSimpleList(canLearn)}</td>
