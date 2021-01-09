@@ -15,7 +15,7 @@ const App = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { teachers, lessons } = useSelector(state => state.mainReducer)
+  const { teachers, lessons, teacher } = useSelector(state => state.mainReducer)
 
   const handleFormOpen = () => setIsModalOpen(!isModalOpen)
 

@@ -1,26 +1,31 @@
 import React, { useState } from 'react'
 import styles from './styles.module.scss';
+import { useDispatch } from 'react-redux';
+import { editTeacherWatcher } from '../../ducks/main'
 
 const TeacherForm = ({ handleFormOpen, person = {} }) => {
+
+  const dispatch = useDispatch();
 
   const [form, setForm] = useState({
     firstName: person.firstName || '',
     lastName: person.lastName || '',
     sex: person.sex || 'male',
-    age: person.age || null,
-    yearsofExperience: person.yearsofExperience || null,
+    age: person.age || 0,
+    yearsofExperience: person.yearsofExperience || 0,
     email: person.email || '',
-    phone: person.phone || '',
+    tel: person.tel || '',
   });
 
   const onChange = event => setForm({
     ...form,
-    [event.name]: event.target.value
+    [event.target.name]: event.target.value
   })
 
   const handleSubmitForm = event => {
     event.preventDefault();
-
+    dispatch(editTeacherWatcher(form, person.id))
+    handleFormOpen()
   }
 
   return (
@@ -31,10 +36,10 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
             <legend>First Name</legend>
             <input
               className={styles.input}
-              placeholder='Ivanov'
+              placeholder='Ivan'
               type="text"
               name='firstName'
-              value={form.name}
+              value={form.firstName}
               onChange={onChange}
             />
           </fieldset>
@@ -43,7 +48,7 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
             <legend>Last Name</legend>
             <input
               className={styles.input}
-              placeholder='Ivan'
+              placeholder='Ivanov'
               type="text"
               name='lastName'
               value={form.lastName}
@@ -69,8 +74,8 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
               className={styles.input}
               placeholder='099-123-45-67'
               type="text"
-              name='phone'
-              value={form.phone}
+              name='tel'
+              value={form.tel}
               onChange={onChange}
             />
           </fieldset>

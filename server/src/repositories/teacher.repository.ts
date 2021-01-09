@@ -16,7 +16,8 @@ export class TeacherRepository extends BaseRepository<Teacher>{
 
   findById(id: string): Promise<TeacherModel | undefined> {
     return this.createQueryBuilder('Teacher')
-      .leftJoinAndSelect('Teacher.canLearn', 'lesson')
+      .leftJoin('Teacher.canLearn', 'lesson')
+      .addSelect('lesson.title')
       .where('Teacher.id = :id', { id })
       .getOne();
   };

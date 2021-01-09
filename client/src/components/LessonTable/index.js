@@ -12,6 +12,7 @@ const LessonTable = ({ lessons }) => {
 
     return teachers.map(person => (
       <NavLink
+        key={person.id}
         to={`/teacher/${person.id}`}
         className={styles.link}
       >
@@ -38,21 +39,15 @@ const LessonTable = ({ lessons }) => {
         {
           lessons.map((lesson, index) => {
             const { id, title, type, duration, room, teacher } = lesson;
-            console.log(room, teacher);
-            return (
-              <tr
-                key={id}
-                className={styles.userRow}
-              >
-                <td>{index + 1}</td>
-                <td>{title}</td>
-                <td>{type || '-'}</td>
-                <td>{duration ? `${duration} min` : '-'}</td>
-                <td>{getSimpleList(room)}</td>
-                <td>{getTeachers(teacher)}</td>
 
-
-              </tr>
+            return (<tr key={id} >
+              <td>{index + 1}</td>
+              <td>{title}</td>
+              <td>{type || '-'}</td>
+              <td>{duration ? `${duration} min` : '-'}</td>
+              <td>{getSimpleList(room)}</td>
+              <td>{getTeachers(teacher)}</td>
+            </tr>
             )
           })
         }
