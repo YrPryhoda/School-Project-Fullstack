@@ -135,13 +135,16 @@ const editTeacherWorker = function* (action) {
   }
 
   try {
-
     const newTeacher = yield call(callApi, endpoint, props)
-
-    yield put({
-      type: ADD_TEACHER_SUCCESS,
-      payload: newTeacher
-    })
+    
+    if (newTeacher.statusCode) {
+      return;
+    } else {
+      yield put({
+        type: ADD_TEACHER_SUCCESS,
+        payload: newTeacher
+      })
+    }
   } catch (error) {
     yield put(actionRequestFail(error))
   }

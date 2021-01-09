@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { getCustomRepository } from 'typeorm';
 import HttpStatusCode from '../constants/httpStatusCode.constants';
-import { getWebError } from '../helpers/error.handler';
+import { validationError } from '../helpers/error.handler';
 import { TeacherRepository } from '../repositories/teacher.repository';
 
 class TeacherController {
@@ -16,7 +16,7 @@ class TeacherController {
     } catch (error) {
       res
         .status(HttpStatusCode.BAD_REQUEST)
-        .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
+        .send(validationError(error, res));
     }
   }
 
@@ -29,7 +29,7 @@ class TeacherController {
     } catch (error) {
       res
         .status(HttpStatusCode.NOT_FOUND)
-        .send(getWebError(error, HttpStatusCode.NOT_FOUND));
+        .send(validationError(error, res));
     }
   }
 
@@ -43,7 +43,7 @@ class TeacherController {
     } catch (error) {
       res
         .status(HttpStatusCode.NOT_FOUND)
-        .send(getWebError(error, HttpStatusCode.NOT_FOUND));
+        .send(validationError(error, res));
     }
   }
 
@@ -57,7 +57,7 @@ class TeacherController {
     } catch (error) {
       res
         .status(HttpStatusCode.NOT_ACCEPTABLE)
-        .send(getWebError(error, HttpStatusCode.NOT_ACCEPTABLE));
+        .send(validationError(error, res));
     }
   }
 
@@ -72,7 +72,7 @@ class TeacherController {
     } catch (error) {
       res
         .status(HttpStatusCode.BAD_REQUEST)
-        .send(getWebError(error, HttpStatusCode.BAD_REQUEST));
+        .send(validationError(error, res));
     }
   }
 

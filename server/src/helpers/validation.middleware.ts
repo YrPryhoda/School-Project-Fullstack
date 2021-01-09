@@ -11,7 +11,11 @@ export const getValidate = (classToFetch: any) => {
       const errors = await validate(instance, { skipMissingProperties: true })
 
       if (errors.length > 0) {
-        next(new Error())
+        const errorsList = errors
+          .map((item) => Object.values(item.constraints as { string: string }))
+          .join(', ');
+
+        next(new Error(errorsList))
       } else {
         next()
       }

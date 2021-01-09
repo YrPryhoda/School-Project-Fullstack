@@ -21,7 +21,7 @@ export class Teacher implements TeacherModel {
   sex!: Sex;
 
   @Column({ nullable: true })
-  email?: string;
+  email!: string;
 
   @Column({ nullable: true })
   tel?: string;

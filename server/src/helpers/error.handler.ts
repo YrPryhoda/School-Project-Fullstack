@@ -1,19 +1,12 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpStatusCode from '../constants/httpStatusCode.constants';
 
-export function getWebError(err: Error, statusCode: number) {
-  return {
-    message: err.message,
-    status: 'error',
-    statusCode
-  };
-}
+export const validationError = (err: Error, res: Response) => {
 
-const validationError = (err: Error, res: Response) => {
   res.status(HttpStatusCode.BAD_REQUEST).json({
     status: 'error',
     statusCode: HttpStatusCode.BAD_REQUEST,
-    message: 'Validation failed',
+    message: err.message,
   });
 };
 

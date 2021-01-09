@@ -17,6 +17,7 @@ export class Teachers1609962055710 implements MigrationInterface {
     const teacher2 = new Teacher();
     teacher2.firstName = 'Yaroslav';
     teacher2.lastName = 'Pryhoda';
+    teacher2.email = 'email@ukr.ua';
     teacher2.tel = '+380636995492';
     teacher2.age = 24;
     teacher2.sex = Sex.male;
