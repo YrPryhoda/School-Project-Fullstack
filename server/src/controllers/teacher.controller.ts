@@ -7,7 +7,6 @@ import { TeacherRepository } from '../repositories/teacher.repository';
 class TeacherController {
 
   createTeacher = async (req: Request, res: Response, next: NextFunction) => {
-
     try {
       const teacherRepository = getCustomRepository(TeacherRepository);
       const teacher = await teacherRepository.createOne(req.body);
@@ -36,11 +35,24 @@ class TeacherController {
   findTeachersByFilters = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const teacherRepository = getCustomRepository(TeacherRepository);
-      const {sex, age, yearsofExperience} = req.body
+      const { sex, age, yearsofExperience } = req.body
 
       const teacher = await teacherRepository.findByFilters(sex, age, yearsofExperience);
 
       res.send(teacher);
+    } catch (error) {
+      res
+        .status(HttpStatusCode.NOT_FOUND)
+        .send(validationError(error, res));
+    }
+  }
+
+  getTargetMathTeachers = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const teacherRepository = getCustomRepository(TeacherRepository);
+      const teachers = await teacherRepository.getTargetMathTeachers();
+      res.send(teachers);
+      
     } catch (error) {
       res
         .status(HttpStatusCode.NOT_FOUND)

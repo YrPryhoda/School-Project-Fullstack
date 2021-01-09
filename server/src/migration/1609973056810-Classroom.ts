@@ -7,7 +7,7 @@ export class Classroom1609973056810 implements MigrationInterface {
 
     [
       {
-        roomNumber: 10,
+        roomNumber: 100,
         floor: 1,
         build: BuildType.A,
         description: 'Lecture class',

@@ -1,4 +1,4 @@
-import { EntityRepository, MoreThanOrEqual, Any } from 'typeorm';
+import { EntityRepository, MoreThanOrEqual, Any, MoreThan } from 'typeorm';
 import { Teacher } from '../entity/Teacher';
 import { TeacherModel, Sex } from '../models/TeacherModel';
 import { BaseRepository } from './base.repository';
@@ -23,6 +23,17 @@ export class TeacherRepository extends BaseRepository<Teacher>{
         age: teacherAge > 0 ? teacherAge : MoreThanOrEqual(0),
         yearsofExperience: yearsofExperience > 0 ? yearsofExperience : MoreThanOrEqual(0)
       })
+      .getMany();
+  }
+
+  getTargetMathTeachers(): Promise<TeacherModel[] | undefined> {
+    return this.createQueryBuilder('Teacher')
+      .leftJoin('Teacher.canLearn', 'lesson')
+      .addSelect('lesson.title')
+      .leftJoin('lesson.room', 'room')
+      .where({ yearsofExperience: MoreThan(10) })
+      .andWhere('lesson.title = :title', { title: 'Maths' })
+      .andWhere('room.roomNumber = :number', { number: 100 })
       .getMany();
   }
 

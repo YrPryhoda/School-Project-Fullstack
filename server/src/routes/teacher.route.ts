@@ -7,7 +7,8 @@ const {
   findTeacher,
   updateTeacher,
   deleteTeacher,
-  findTeachersByFilters
+  findTeachersByFilters,
+  getTargetMathTeachers
 } = new TeacherController();
 
 const routes = Router();
@@ -15,6 +16,7 @@ const routes = Router();
 routes
   .get('/', findAllTeachers)
   .patch('/filters', findTeachersByFilters)
+  .get('/special-filter', getTargetMathTeachers)
   .get('/:id', findTeacher)
   .post('/', createTeacher)
   .put('/:id', updateTeacher)

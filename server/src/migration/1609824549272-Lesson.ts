@@ -20,6 +20,16 @@ export class Lesson1609824549272 implements MigrationInterface {
         duration: LessonDuration.double,
         type: LessonType.lecture,
       },
+      {
+        title: Subjects.Art,
+        duration: LessonDuration.double,
+        type: LessonType.seminar,
+      },
+      {
+        title: Subjects.English,
+        duration: LessonDuration.standart,
+        type: LessonType.group,
+      },
     ].map(async (lesson) => {
       const instance = new Lesson();
       instance.title = lesson.title;

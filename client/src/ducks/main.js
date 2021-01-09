@@ -18,6 +18,9 @@ export const FETCH_TEACHER_SUCCESS = 'FETCH_TEACHER_SUCCESS';
 export const FETCH_WITH_FILTERS_REQUEST = 'FETCH_WITH_FILTERS_REQUEST';
 export const FETCH_WITH_FILTERS_SUCCESS = 'FETCH_WITH_FILTERS_SUCCESS';
 
+export const FETCH_MATH_TEACHERS_REQUEST = 'FETCH_MATH_TEACHERS_REQUEST';
+export const FETCH_MATH_TEACHERS_SUCCESS = 'FETCH_MATH_TEACHERS_SUCCESS';
+
 
 const initialState = {
   loading: false,
@@ -32,6 +35,7 @@ export const reducer = (state = initialState, { type, payload, error }) => {
   switch (type) {
 
     case FETCH_ALL_REQUEST:
+    case FETCH_MATH_TEACHERS_REQUEST:
     case ADD_TEACHER_REQUEST:
     case DELETE_TEACHER_REQUEST:
     case FETCH_TEACHER_REQUEST:
@@ -40,6 +44,7 @@ export const reducer = (state = initialState, { type, payload, error }) => {
         loading: true
       };
 
+    case FETCH_MATH_TEACHERS_SUCCESS:
     case FETCH_WITH_FILTERS_SUCCESS:
     case FETCH_TEACHERS_SUCCESS:
       return {
@@ -225,6 +230,26 @@ const fetchWithFiltersdWorker = function* (action) {
   }
 }
 
+export const fetchTeachersWithMathFilterWatcher = () => ({
+  type: FETCH_MATH_TEACHERS_REQUEST
+})
+
+const fetchTeachersWithMathFilterWorker = function* () {
+  const endpoint = '/api/teacher/special-filter';
+
+  try {
+    const result = yield call(callApi, endpoint)
+    
+    yield put({
+      type: FETCH_MATH_TEACHERS_SUCCESS,
+      payload: result
+    })
+
+  } catch (error) {
+    yield put(actionRequestFail(error))
+  }
+}
+
 export default function* saga() {
   yield all([
     takeEvery(FETCH_ALL_REQUEST, loadAllWorker),
@@ -232,5 +257,6 @@ export default function* saga() {
     takeEvery(DELETE_TEACHER_REQUEST, deleteTeacherWorker),
     takeEvery(FETCH_TEACHER_REQUEST, loadTeacherByIdWorker),
     takeEvery(FETCH_WITH_FILTERS_REQUEST, fetchWithFiltersdWorker),
+    takeEvery(FETCH_MATH_TEACHERS_REQUEST, fetchTeachersWithMathFilterWorker),
   ])
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
-import { fetchWithFiltersdWatcher, loadAllWatcher } from '../../ducks/main';
+import { fetchWithFiltersdWatcher, loadAllWatcher, fetchTeachersWithMathFilterWatcher } from '../../ducks/main';
 
 import styles from './styles.module.scss';
 
@@ -23,6 +23,7 @@ const FilterBar = () => {
   }
 
   const handleResetFilters = () => dispatch(loadAllWatcher())
+  const handleMathFilter = () => dispatch(fetchTeachersWithMathFilterWatcher())
 
   return (
     <div className={styles.section}>
@@ -65,6 +66,12 @@ const FilterBar = () => {
           />
         </div>
         <input className={styles.btn} type='submit' value='Search' />
+        <input
+          className={styles.btn}
+          type='button'
+          value='Special Math Filter'
+          onClick={handleMathFilter}
+        />
         <input
           className={styles.btn}
           type='button'
