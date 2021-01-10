@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import styles from './styles.module.scss';
 import { useDispatch } from 'react-redux';
 import { editTeacherWatcher } from '../../ducks/main'
+import { subjects, getSubjectsList } from '../../helpers';
+import Select from 'react-select'
 
 const TeacherForm = ({ handleFormOpen, person = {} }) => {
 
@@ -16,6 +18,7 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
     email: person.email || '',
     tel: person.tel || '',
     avatar: person.avatar || '',
+    canLearn: person.canLearn ? getSubjectsList(person.canLearn) : []
   });
 
   const onChange = event => setForm({
@@ -28,6 +31,11 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
     dispatch(editTeacherWatcher(form, person.id))
     handleFormOpen()
   }
+
+  const handleOnSubjectChange = props => setForm(prevState => ({
+    ...prevState,
+    canLearn: props
+  }));
 
   return (
     <div className={styles.modalBg}>
@@ -132,6 +140,20 @@ const TeacherForm = ({ handleFormOpen, person = {} }) => {
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
+          </fieldset>
+
+          <fieldset>
+            <legend> Subjects</legend>
+            <Select
+              isMulti
+              name='canLearn'
+              menuPlacement='top'
+              maxMenuHeight={200}
+              closeMenuOnSelect={false}
+              value={form.canLearn}
+              options={subjects}
+              onChange={handleOnSubjectChange}
+            />
           </fieldset>
 
           <div className={styles.btnBlock}>

@@ -1,63 +1,63 @@
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 1.2rem;
-  .tableHeader {
-    font-size: 1.3rem;
-  }
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1.2rem;
+    .tableHeader {
+      font-size: 1.3rem;
+    }
 
-  TBODY TR:nth-child(odd) {
-    background-color: rgb(241, 240, 240);
-  }
+    TBODY TR:nth-child(odd) {
+      background-color: rgb(241, 240, 240);
+    }
 
-  td {
-    text-align: center;
-    padding: 10px;
-  }
+    td {
+      text-align: center;
+      padding: 10px;
+    }
 
-  tbody:before {
-    content: "@";
-    display: block;
-    line-height: 15px;
-    text-indent: -99999px;
-  }
+    tbody:before {
+      content: "@";
+      display: block;
+      line-height: 15px;
+      text-indent: -99999px;
+    }
 
-  .btnSmall {
-    cursor: pointer;
-    width: 50px;
-    font-size: 0.8rem;
-    border: 1px solid #cccccc;
-    padding: 3px 5px;
-    transition: all 0.3s;
-    margin: 2px;
-    &:hover {
-      background-color: #ecebeb;
+    .btnSmall {
+      cursor: pointer;
+      width: 50px;
+      font-size: 0.8rem;
+      border: 1px solid #cccccc;
+      padding: 3px 5px;
+      transition: all 0.3s;
+      margin: 2px;
+      &:hover {
+        background-color: #ecebeb;
+      }
+    }
+
+    .btnDelete {
+      background-color: red;
+      color: #ffffff;
+      &:hover {
+        color: #000000;
+      }
     }
   }
 
-  .btnDelete {
-    background-color: red;
-    color: #ffffff;
-    &:hover {
-      color: #000000;
+  .btnSection {
+    display: flex;
+    padding: 20px;
+    justify-content: flex-end;
+
+    .btnAdd {
+      cursor: pointer;
+      font-size: 1.1rem;
+      border: 1px solid #cccccc;
+      padding: 8px 16px;
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: #ecebeb;
+      }
     }
   }
-}
-
-.btnSection {
-  display: flex;
-  padding: 20px;
-  justify-content: flex-end;
-
-  .btnAdd {
-    cursor: pointer;
-    font-size: 1.1rem;
-    border: 1px solid #cccccc;
-    padding: 8px 16px;
-    transition: all 0.3s;
-
-    &:hover {
-      background-color: #ecebeb;
-    }
-  }
-}

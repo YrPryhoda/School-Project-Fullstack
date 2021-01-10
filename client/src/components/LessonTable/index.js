@@ -41,14 +41,15 @@ const LessonTable = ({ lessons }) => {
           lessons.map((lesson, index) => {
             const { id, title, type, duration, room, teacher } = lesson;
 
-            return (<tr key={id} >
-              <td>{index + 1}</td>
-              <td>{title}</td>
-              <td>{type || '-'}</td>
-              <td>{duration ? `${duration} min` : '-'}</td>
-              <td>{getSimpleList(room)}</td>
-              <td>{getTeachers(teacher)}</td>
-            </tr>
+            return (
+              <tr key={id} >
+                <td>{index + 1}</td>
+                <td>{title}</td>
+                <td>{type || '-'}</td>
+                <td>{duration ? `${duration} min` : '-'}</td>
+                <td>{getSimpleList(room, 'roomNumber')}</td>
+                <td>{getTeachers(teacher)}</td>
+              </tr>
             )
           })
         }

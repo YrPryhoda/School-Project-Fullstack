@@ -6,11 +6,13 @@ import styles from './styles.module.scss';
 
 const FilterBar = () => {
   const dispatch = useDispatch();
-  const [filters, setFilters] = useState({
-    sex: 'male',
+  const initialState = {
+    sex: '',
     age: '',
     yearsofExperience: ''
-  });
+  }
+
+  const [filters, setFilters] = useState(initialState);
 
   const onFilterChange = event => setFilters(prevState => ({
     ...prevState,
@@ -22,7 +24,11 @@ const FilterBar = () => {
     dispatch(fetchWithFiltersdWatcher(filters))
   }
 
-  const handleResetFilters = () => dispatch(loadAllWatcher())
+  const handleResetFilters = () => {
+    setFilters(initialState)
+    dispatch(loadAllWatcher())
+  }
+
   const handleMathFilter = () => dispatch(fetchTeachersWithMathFilterWatcher())
 
   return (
@@ -37,6 +43,7 @@ const FilterBar = () => {
             value={filters.sex}
             onChange={onFilterChange}
           >
+            <option value="">Any</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
