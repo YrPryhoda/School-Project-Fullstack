@@ -3,13 +3,21 @@ import { getCustomRepository } from 'typeorm';
 import HttpStatusCode from '../constants/httpStatusCode.constants';
 import { validationError } from '../helpers/error.handler';
 import { TeacherRepository } from '../repositories/teacher.repository';
+import { LessonModel } from '../models/LessonModel';
+import { getLessons } from '../helpers/lessons.transformer';
+
 
 class TeacherController {
 
   createTeacher = async (req: Request, res: Response, next: NextFunction) => {
     try {
       const teacherRepository = getCustomRepository(TeacherRepository);
-      const teacher = await teacherRepository.createOne(req.body);
+      const { canLearn } = req.body;
+      const arrLessons: LessonModel[] = await getLessons(canLearn);
+
+      const teacher = await teacherRepository.createOne({
+        ...req.body, canLearn: arrLessons
+      });
 
       res.send(teacher)
     } catch (error) {
@@ -52,7 +60,7 @@ class TeacherController {
       const teacherRepository = getCustomRepository(TeacherRepository);
       const teachers = await teacherRepository.getTargetMathTeachers();
       res.send(teachers);
-      
+
     } catch (error) {
       res
         .status(HttpStatusCode.NOT_FOUND)
@@ -78,7 +86,14 @@ class TeacherController {
     try {
       const teacherRepository = getCustomRepository(TeacherRepository);
       const { params: { id }, body } = req;
-      const updatedTeacher = await teacherRepository.updateOne(id, body);
+      const { canLearn } = req.body;
+
+      const arrLessons: LessonModel[] = await getLessons(canLearn);
+
+      const updatedTeacher = await teacherRepository.updateOne(id, {
+        ...body,
+        canLearn: arrLessons
+      });
 
       res.send(updatedTeacher);
     } catch (error) {

@@ -36,3 +36,7 @@ export interface LessonModel {
   duration?: LessonDuration,
   type?: LessonType
 }
+export type LessonObject = {
+  value: string,
+  label: string
+}

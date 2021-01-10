@@ -1,4 +1,4 @@
-import { EntityRepository, MoreThanOrEqual, Any, MoreThan } from 'typeorm';
+import { EntityRepository, MoreThanOrEqual, Any, MoreThan, getRepository } from 'typeorm';
 import { Teacher } from '../entity/Teacher';
 import { TeacherModel, Sex } from '../models/TeacherModel';
 import { BaseRepository } from './base.repository';
@@ -8,16 +8,14 @@ export class TeacherRepository extends BaseRepository<Teacher>{
 
   selectAll(): Promise<TeacherModel[] | []> {
     return this.createQueryBuilder('Teacher')
-      .leftJoin('Teacher.canLearn', 'lesson')
-      .addSelect('lesson.title')
+      .leftJoinAndSelect('Teacher.canLearn', 'lesson')
       .getMany();
   };
 
   findByFilters(sex: string, teacherAge: number, yearsofExperience: number): Promise<TeacherModel[] | []> {
 
     return this.createQueryBuilder('Teacher')
-      .leftJoin('Teacher.canLearn', 'lesson')
-      .addSelect('lesson.title')
+      .leftJoinAndSelect('Teacher.canLearn', 'lesson')
       .where({
         sex: !sex ? Any([Sex.male, Sex.female]) : sex,
         age: teacherAge > 0 ? teacherAge : MoreThanOrEqual(0),
@@ -28,8 +26,7 @@ export class TeacherRepository extends BaseRepository<Teacher>{
 
   getTargetMathTeachers(): Promise<TeacherModel[] | undefined> {
     return this.createQueryBuilder('Teacher')
-      .leftJoin('Teacher.canLearn', 'lesson')
-      .addSelect('lesson.title')
+      .leftJoinAndSelect('Teacher.canLearn', 'lesson')
       .leftJoin('lesson.room', 'room')
       .where({ yearsofExperience: MoreThan(10) })
       .andWhere('lesson.title = :title', { title: 'Maths' })
@@ -39,14 +36,17 @@ export class TeacherRepository extends BaseRepository<Teacher>{
 
   findById(id: string): Promise<TeacherModel | undefined> {
     return this.createQueryBuilder('Teacher')
-      .leftJoin('Teacher.canLearn', 'lesson')
-      .addSelect('lesson.title')
+      .leftJoinAndSelect('Teacher.canLearn', 'lesson')
       .where('Teacher.id = :id', { id })
       .getOne();
   };
 
   async updateOne(id: string, newTeacher: Teacher): Promise<TeacherModel | undefined> {
-    await this.updateById(id, newTeacher);
-    return this.findById(id)
+
+    const teacher = await this.findById(id);
+    const updated = { ...teacher, ...newTeacher };
+    console.log(updated, 'RERERER');
+
+    return this.save(updated)
   }
 }

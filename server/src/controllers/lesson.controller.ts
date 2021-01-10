@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { getCustomRepository, Repository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import HttpStatusCode from '../constants/httpStatusCode.constants';
 import { validationError } from '../helpers/error.handler';
 import { LessonRepository } from '../repositories/lesson.repository';

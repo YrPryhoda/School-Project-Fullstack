@@ -7,7 +7,7 @@ export class BaseRepository<T> extends Repository<T>{
     return this.find()
   };
 
-  createOne(teacher: T) {
+  createOne(teacher: T): Promise<T | undefined> {
     return this.save(teacher);
   }
 

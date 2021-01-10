@@ -1,5 +1,6 @@
 import { IsEmail, IsNotEmpty } from 'class-validator';
 import { Expose } from 'class-transformer';
+import { LessonObject } from '../models/LessonModel';
 
 export class Teacher {
 
@@ -32,4 +33,7 @@ export class Teacher {
 
   @Expose()
   yearsofExperience?: number;
+
+  @Expose()
+  canLearn?: LessonObject[];
 }

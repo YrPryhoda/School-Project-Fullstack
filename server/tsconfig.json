@@ -10,6 +10,7 @@
     "emitDecoratorMetadata": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
   },
   "exclude": [
     "node_modules",
