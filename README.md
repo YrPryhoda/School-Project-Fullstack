@@ -1,5 +1,6 @@
-#Мини проект SCHOOL
+# Мини проект SCHOOL
 Демонстрация [Link to Imgur video](https://imgur.com/a/HiU5xQs)
+
 Использованные технологии:
 
 > Server:
