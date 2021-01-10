@@ -1,5 +1,5 @@
 #Мини проект SCHOOL
-
+Демонстрация [Link to Imgur video](https://imgur.com/a/HiU5xQs)
 Использованные технологии:
 
 > Server:
@@ -18,4 +18,4 @@
 -   Saga
 -   SCSS
 
-Структура БД https://imgur.com/a/5vXL6OT
+Структура БД [Link to Imgur photos](https://imgur.com/0OxFdBz)
